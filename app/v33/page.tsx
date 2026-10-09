@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Code2, Mail, MapPin, Moon, Phone, Sun } from "lucide-react";
+import { ArrowUpRight, Code2, Database, Languages, Layers3, Mail, MapPin, Moon, Phone, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cvData } from "@/data/cv";
 import { GreatFloatingMenu } from "@/components/ui/great-floating-menu";
@@ -27,6 +27,12 @@ export default function V33Page() {
     tags: project.stack,
     icon: <Code2 size={34} strokeWidth={1.4} />,
   }));
+  const skillGroups = [
+    { label: "Build", icon: <Code2 size={19} />, items: cvData.skills.find((group) => group.category === "Programming Languages")?.skills ?? [] },
+    { label: "Interfaces", icon: <Layers3 size={19} />, items: cvData.skills.find((group) => group.category === "Web & Mobile")?.skills ?? [] },
+    { label: "Tools", icon: <Database size={19} />, items: cvData.skills.find((group) => group.category === "Developer Tools")?.skills ?? [] },
+    { label: "Design", icon: <Languages size={19} />, items: cvData.skills.find((group) => group.category === "Design Tools")?.skills ?? [] },
+  ];
 
   return (
     <main className={`v33-shell ${theme}`}>
@@ -39,8 +45,9 @@ export default function V33Page() {
             <PortfolioBrandLink brand="linkedin" href={cvData.contact.linkedin} label="LinkedIn" />
             <PortfolioBrandLink brand="github" href={cvData.contact.github} label="GitHub" />
           </div>
-          <button type="button" className="v33-theme-toggle" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>
-            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          <button type="button" className="v33-theme-toggle" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`} aria-pressed={theme === "light"}>
+            <span className="v33-theme-track"><span className="v33-theme-knob">{theme === "dark" ? <Moon size={13} /> : <Sun size={13} />}</span></span>
+            <span className="v33-theme-label">{theme === "dark" ? "Dark" : "Light"}</span>
           </button>
         </div>
       </header>
@@ -56,9 +63,9 @@ export default function V33Page() {
             <span className="v33-kicker">fun facts</span>
             <ul>
               <li>I live in Giza and still haven&apos;t visited the pyramids.</li>
-              <li>I speak English, Arabic, and a little bit of RTL.</li>
-              <li>I once turned a food-ordering app into 30+ screens.</li>
-              <li>I like clean APIs almost as much as clean interfaces.</li>
+              <li>I speak English and Arabic, and understand some Japanese when I hear it.</li>
+              <li>I designed both the interface and the mascot for a food-ordering app.</li>
+              <li>I enjoy turning complicated flows into screens people can actually use.</li>
             </ul>
           </aside>
         </section>
@@ -66,22 +73,23 @@ export default function V33Page() {
           <div className="v33-project-heading"><span className="v33-kicker">selected work</span><h2>Things I&apos;ve shipped<br /><em>and learned from.</em></h2></div>
           <ScrollFlyingCards backgroundText="SHIPPED" cards={cards} />
         </section>
-        <section className="v33-proof">
-          <div><strong>30+</strong><span>screens shipped in Otlob</span></div>
-          <div><strong>3</strong><span>products in this portfolio</span></div>
-          <div><strong>4</strong><span>tools I reach for: Flutter, React, APIs, Git</span></div>
-        </section>
         <section className="v33-now">
-          <div className="v33-section-heading"><span className="v33-kicker">still learning</span><h2>Still <em>learning.</em></h2><p>Two active tracks are helping me move from shipping mobile interfaces to building broader product systems.</p></div>
+          <div className="v33-section-heading"><h2>Still <em>learning.</em></h2><p>Two active tracks are helping me move from shipping mobile interfaces to building broader product systems.</p></div>
           <div className="v33-now-grid">
             {cvData.training.map((item) => <article key={item.institution}><span className="v33-kicker">{item.period}</span><h3>{item.role}</h3><p>{item.highlights[0]}</p><small>{item.organization} · {item.location}</small></article>)}
+          </div>
+        </section>
+        <section className="v33-use">
+          <div className="v33-section-heading"><h2>What I <em>use.</em></h2><p>The tools I keep close when I move from an idea to a working interface.</p></div>
+          <div className="v33-use-grid">
+            {skillGroups.map((group) => <article key={group.label}><div className="v33-use-label">{group.icon}<span>{group.label}</span></div><div className="v33-use-items">{group.items.map((item) => <span key={item}>{item}</span>)}</div></article>)}
           </div>
         </section>
         <section className="v33-close">
           <span className="v33-kicker">contact</span>
           <h2>Let&apos;s build something<br /><em>worth opening twice.</em></h2>
           <p><MapPin size={14} /> {cvData.contact.location} · available for remote work</p>
-          <a className="v33-cta" href={`mailto:${cvData.contact.email}`}><Mail size={15} /> Email Ahmed</a>
+          <a className="v33-cta" href={`mailto:${cvData.contact.email}`}><Mail size={15} /> Start a conversation</a>
           <a className="v33-phone" href={`tel:${cvData.contact.phone}`}><Phone size={14} /> {cvData.contact.phone}</a>
         </section>
         <footer className="v33-footer"><span>Ahmed Hesham · software developer</span><div><PortfolioBrandLink brand="github" href={cvData.contact.github} label="GitHub" /><PortfolioBrandLink brand="linkedin" href={cvData.contact.linkedin} label="LinkedIn" /></div></footer>

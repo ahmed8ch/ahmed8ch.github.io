@@ -14,6 +14,8 @@ type GreatFloatingMenuProps = {
 export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
   const [open, setOpen] = useState(false);
   const [side, setSide] = useState<"left" | "right">("right");
+  const [dragging, setDragging] = useState(false);
+  const [dragX, setDragX] = useState<number | null>(null);
   const dragRef = useRef<{ pointerId: number; startX: number; moved: boolean } | null>(null);
   const suppressClickRef = useRef(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -45,14 +47,17 @@ export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
 
   const onPointerDown = (event: ReactPointerEvent<HTMLButtonElement>) => {
     dragRef.current = { pointerId: event.pointerId, startX: event.clientX, moved: false };
+    setDragging(true);
+    setDragX(event.clientX);
     event.currentTarget.setPointerCapture(event.pointerId);
   };
 
   const onPointerMove = (event: ReactPointerEvent<HTMLButtonElement>) => {
     const drag = dragRef.current;
     if (!drag || !event.currentTarget.hasPointerCapture(drag.pointerId)) return;
-    if (Math.abs(event.clientX - drag.startX) > 12) drag.moved = true;
+    if (Math.abs(event.clientX - drag.startX) > 4) drag.moved = true;
     if (drag.moved) {
+      setDragX(Math.max(10, Math.min(window.innerWidth - 190, event.clientX - 89)));
       const nextSide = event.clientX < window.innerWidth / 2 ? "left" : "right";
       setSide(nextSide);
     }
@@ -62,6 +67,8 @@ export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
     const drag = dragRef.current;
     if (!drag) return;
     dragRef.current = null;
+    setDragging(false);
+    setDragX(null);
     if (drag.moved) {
       event.preventDefault();
       suppressClickRef.current = true;
@@ -78,14 +85,14 @@ export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
   };
 
   return (
-    <div ref={rootRef} className={cn("great-version-menu", `is-${side}`)}>
+    <div ref={rootRef} className={cn("great-version-menu", `is-${side}`, dragging && "is-dragging")} style={dragX === null ? undefined : { left: dragX, right: "auto" }}>
       <motion.div
         animate={{ width: open ? 360 : 178, height: open ? 500 : 48 }}
         transition={{ type: "spring", stiffness: 300, damping: 28 }}
         className={cn("great-version-panel", open && "is-open")}
       >
-        <button type="button" className="great-version-trigger" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onClick={onClick} aria-expanded={open} aria-label={open ? "Close version menu" : "Open version menu"} title="Drag this menu to either edge">
-          <span>versions</span>
+        <button type="button" className="great-version-trigger" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerUp} onClick={onClick} aria-expanded={open} aria-label={open ? "Close version menu" : "Open version menu"} title="Drag horizontally to dock this menu">
+          <span>{dragging ? "dragging" : "versions"}</span>
           <span className="great-version-action">{open ? "Close" : current}</span>
         </button>
         <AnimatePresence>
