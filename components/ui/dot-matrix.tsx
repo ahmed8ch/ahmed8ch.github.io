@@ -9,6 +9,7 @@ type DotMatrixProps = {
 
 export function DotMatrix({ onActivate }: DotMatrixProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const timeoutRef = useRef<number | null>(null);
   const [simulating, setSimulating] = useState(false);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export function DotMatrix({ onActivate }: DotMatrixProps) {
     const draw = () => {
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.fillStyle = "#a78bfa";
-      const pulse = simulating ? (generation % 2 === 0 ? 0.95 : 0.5) : 0.8;
+      const pulse = simulating ? (generation % 2 === 0 ? 1 : 0.55) : 0.85;
       for (let y = 0; y < rows; y += 1) {
         for (let x = 0; x < columns; x += 1) {
           const live = simulating ? (x * 3 + y * 5 + generation) % 7 < 3 : x === 1 || x === 4 || x === 7 || x === 12;
@@ -45,13 +46,14 @@ export function DotMatrix({ onActivate }: DotMatrixProps) {
   }, [simulating]);
 
   const activate = () => {
+    if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
     setSimulating(true);
     onActivate?.();
-    window.setTimeout(() => setSimulating(false), 10000);
+    timeoutRef.current = window.setTimeout(() => setSimulating(false), 10000);
   };
 
   return (
-    <button className="status-badge" type="button" onClick={activate} aria-label="Run status matrix simulation">
+    <button className="status-badge" type="button" onClick={activate} aria-label="Run status matrix simulation" aria-pressed={simulating}>
       <canvas ref={canvasRef} width="80" height="40" aria-hidden="true" />
       <span>{simulating ? "SIMULATING" : "READY"}</span>
       <Activity size={13} strokeWidth={1.5} aria-hidden="true" />

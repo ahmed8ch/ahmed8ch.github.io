@@ -4,6 +4,8 @@ import { ArrowUpRight, ExternalLink, Mail, MapPin, Move, Moon, Phone, Printer, S
 import { useEffect, useState } from "react";
 import DotGridBackground from "@/components/ui/dot-grid-background";
 import { cvData } from "@/data/cv";
+import { GreatFloatingMenu } from "@/components/ui/great-floating-menu";
+import { versionLinks } from "@/data/version-links";
 
 export default function V2Page() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -15,6 +17,7 @@ export default function V2Page() {
 
   return (
     <main className={`v2-shell ${theme}`}>
+      <GreatFloatingMenu links={versionLinks} current="V2" />
       <DotGridBackground
         cols={28}
         dotSize={3}

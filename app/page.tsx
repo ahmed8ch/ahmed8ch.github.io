@@ -7,10 +7,14 @@ import { AmbientCanvas } from "@/components/ui/ambient-canvas";
 import { DotMatrix } from "@/components/ui/dot-matrix";
 import { FluidTabs } from "@/components/ui/fluid-tabs";
 import { GreatUIRow } from "@/components/ui/great-ui-row";
+import { KobraToast } from "@/components/ui/kobra-toast";
+import { GreatFloatingMenu } from "@/components/ui/great-floating-menu";
+import { versionLinks } from "@/data/version-links";
 
 export default function Home() {
   const [debug, setDebug] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [toastOpen, setToastOpen] = useState(false);
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem("icareer-theme");
@@ -40,6 +44,7 @@ export default function Home() {
   return (
     <main data-theme={theme} className={debug ? "debug-mode" : ""}>
       <AmbientCanvas />
+      <GreatFloatingMenu links={versionLinks} current="V1" />
       <div className="page-shell">
         <header className="site-header">
           <a className="wordmark" href="#top" aria-label="Return to top">AH<span>•</span>L / CV</a>
@@ -112,8 +117,10 @@ export default function Home() {
 
         <footer className="site-footer">
           <div><span className="caption">© {new Date().getFullYear()} Ahmed Hesham Lotfy</span><span className="footer-separator">/</span><span className="caption">Software developer · Giza, Egypt</span></div>
+          <button type="button" className="deploy-trigger" onClick={() => setToastOpen(true)}>./deploy-prod.sh</button>
         </footer>
       </div>
+      <KobraToast open={toastOpen} onClose={() => setToastOpen(false)} />
     </main>
   );
 }
