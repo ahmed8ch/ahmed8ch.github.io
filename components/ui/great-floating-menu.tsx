@@ -85,7 +85,7 @@ export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
         className={cn("great-version-panel", open && "is-open")}
       >
         <button type="button" className="great-version-trigger" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onClick={onClick} aria-expanded={open} aria-label={open ? "Close version menu" : "Open version menu"} title="Drag this menu to either edge">
-          <span><b>AH</b> / portfolio</span>
+          <span>versions</span>
           <span className="great-version-action">{open ? "Close" : current}</span>
         </button>
         <AnimatePresence>

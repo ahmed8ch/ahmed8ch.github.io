@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, BriefcaseBusiness, Code2, GraduationCap, Mail, MapPin, Moon, Phone, Sun } from "lucide-react";
+import { ArrowUpRight, Code2, Mail, MapPin, Moon, Phone, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cvData } from "@/data/cv";
 import { GreatFloatingMenu } from "@/components/ui/great-floating-menu";
@@ -25,7 +25,7 @@ export default function V33Page() {
     description: project.highlights.join(" "),
     meta: `${project.subtitle} · ${project.period}`,
     tags: project.stack,
-    icon: <Code2 size={38} strokeWidth={1.4} />,
+    icon: <Code2 size={34} strokeWidth={1.4} />,
   }));
 
   return (
@@ -33,7 +33,7 @@ export default function V33Page() {
       <MagneticFilings theme={theme} />
       <GreatFloatingMenu links={versionLinks} current="V3.3" />
       <header className="v33-header">
-        <a className="v33-wordmark" href="#top"><span>AH</span> Ahmed Hesham</a>
+        <a className="v33-wordmark" href="#top">Ahmed Hesham</a>
         <div className="v33-header-actions">
           <div className="v33-header-socials">
             <PortfolioBrandLink brand="linkedin" href={cvData.contact.linkedin} label="LinkedIn" />
@@ -46,34 +46,45 @@ export default function V33Page() {
       </header>
       <div className="v33-wrap" id="top">
         <section className="v33-hero">
-          <span className="v33-kicker">selected work / frontend development</span>
-          <h1>Mobile products,<br /><em>carefully built.</em></h1>
-          <p>I build clear interfaces, connect them to real APIs, and pay attention to the details that make a product easier to trust.</p>
-          <a className="v33-cta" href="#projects">View selected work <ArrowUpRight size={15} /></a>
+          <div className="v33-hero-copy">
+            <h1>Hi, I&apos;m Ahmed.</h1>
+            <p className="v33-role">Software developer<br /><em>with a product eye.</em></p>
+            <p>I build mobile products, shape the interface, and connect the pieces to real APIs.</p>
+            <a className="v33-cta" href="#projects">See what I&apos;ve shipped <ArrowUpRight size={15} /></a>
+          </div>
+          <aside className="v33-facts" aria-label="Fun facts">
+            <span className="v33-kicker">fun facts</span>
+            <ul>
+              <li>I live in Giza and still haven&apos;t visited the pyramids.</li>
+              <li>I speak English, Arabic, and a little bit of RTL.</li>
+              <li>I once turned a food-ordering app into 30+ screens.</li>
+              <li>I like clean APIs almost as much as clean interfaces.</li>
+            </ul>
+          </aside>
         </section>
         <section id="projects" className="v33-projects">
+          <div className="v33-project-heading"><span className="v33-kicker">selected work</span><h2>Things I&apos;ve shipped<br /><em>and learned from.</em></h2></div>
           <ScrollFlyingCards backgroundText="SHIPPED" cards={cards} />
         </section>
         <section className="v33-proof">
           <div><strong>30+</strong><span>screens shipped in Otlob</span></div>
           <div><strong>3</strong><span>products in this portfolio</span></div>
-          <div><strong>2026</strong><span>computer engineering graduate</span></div>
+          <div><strong>4</strong><span>tools I reach for: Flutter, React, APIs, Git</span></div>
         </section>
         <section className="v33-now">
-          <div className="v33-section-heading"><span className="v33-kicker">current work</span><h2>What I&apos;m working<br /><em>on now.</em></h2></div>
+          <div className="v33-section-heading"><span className="v33-kicker">still learning</span><h2>Still <em>learning.</em></h2><p>Two active tracks are helping me move from shipping mobile interfaces to building broader product systems.</p></div>
           <div className="v33-now-grid">
             {cvData.training.map((item) => <article key={item.institution}><span className="v33-kicker">{item.period}</span><h3>{item.role}</h3><p>{item.highlights[0]}</p><small>{item.organization} · {item.location}</small></article>)}
-            <article><GraduationCap size={20} /><span className="v33-kicker">education</span><h3>{cvData.education[0].degree}</h3><p>{cvData.education[0].institution}</p><small>{cvData.education[0].graduationDate}</small></article>
           </div>
         </section>
         <section className="v33-close">
           <span className="v33-kicker">contact</span>
-          <h2>Need a frontend<br /><em>for the next release?</em></h2>
+          <h2>Let&apos;s build something<br /><em>worth opening twice.</em></h2>
           <p><MapPin size={14} /> {cvData.contact.location} · available for remote work</p>
           <a className="v33-cta" href={`mailto:${cvData.contact.email}`}><Mail size={15} /> Email Ahmed</a>
           <a className="v33-phone" href={`tel:${cvData.contact.phone}`}><Phone size={14} /> {cvData.contact.phone}</a>
         </section>
-        <footer className="v33-footer"><span>Ahmed Hesham · software developer</span><div><a href={cvData.contact.github} target="_blank" rel="noreferrer"><Code2 size={12} /> GitHub</a><a href={cvData.contact.linkedin} target="_blank" rel="noreferrer"><BriefcaseBusiness size={12} /> LinkedIn</a></div></footer>
+        <footer className="v33-footer"><span>Ahmed Hesham · software developer</span><div><PortfolioBrandLink brand="github" href={cvData.contact.github} label="GitHub" /><PortfolioBrandLink brand="linkedin" href={cvData.contact.linkedin} label="LinkedIn" /></div></footer>
       </div>
     </main>
   );
