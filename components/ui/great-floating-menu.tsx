@@ -80,7 +80,7 @@ export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
   return (
     <div ref={rootRef} className={cn("great-version-menu", `is-${side}`)}>
       <motion.div
-        animate={{ width: open ? 360 : 178, height: open ? 420 : 48 }}
+        animate={{ width: open ? 360 : 178, height: open ? 500 : 48 }}
         transition={{ type: "spring", stiffness: 300, damping: 28 }}
         className={cn("great-version-panel", open && "is-open")}
       >
