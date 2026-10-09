@@ -52,7 +52,10 @@ export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
     const drag = dragRef.current;
     if (!drag || !event.currentTarget.hasPointerCapture(drag.pointerId)) return;
     if (Math.abs(event.clientX - drag.startX) > 12) drag.moved = true;
-    if (drag.moved) setSide(event.clientX < window.innerWidth / 2 ? "left" : "right");
+    if (drag.moved) {
+      const nextSide = event.clientX < window.innerWidth / 2 ? "left" : "right";
+      setSide(nextSide);
+    }
   };
 
   const onPointerUp = (event: ReactPointerEvent<HTMLButtonElement>) => {
@@ -83,7 +86,7 @@ export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
       >
         <button type="button" className="great-version-trigger" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onClick={onClick} aria-expanded={open} aria-label={open ? "Close version menu" : "Open version menu"} title="Drag this menu to either edge">
           <span><b>AH</b> / portfolio</span>
-          <span className="great-version-action">{open ? "Close" : `Versions · ${current}`}</span>
+          <span className="great-version-action">{open ? "Close" : current}</span>
         </button>
         <AnimatePresence>
           {open && (

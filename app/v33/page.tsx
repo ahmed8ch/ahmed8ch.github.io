@@ -46,10 +46,10 @@ export default function V33Page() {
       </header>
       <div className="v33-wrap" id="top">
         <section className="v33-hero">
-          <span className="v33-kicker">V3.3 / a work in motion</span>
-          <h1>Scroll through<br /><em>the things I make.</em></h1>
-          <p>I build interfaces that make complicated product ideas feel easy to use. This is the short, visual version of what I have been learning, shipping, and improving.</p>
-          <a className="v33-cta" href="#projects">Enter the work <ArrowUpRight size={15} /></a>
+          <span className="v33-kicker">selected work / frontend development</span>
+          <h1>Mobile products,<br /><em>carefully built.</em></h1>
+          <p>I build clear interfaces, connect them to real APIs, and pay attention to the details that make a product easier to trust.</p>
+          <a className="v33-cta" href="#projects">View selected work <ArrowUpRight size={15} /></a>
         </section>
         <section id="projects" className="v33-projects">
           <ScrollFlyingCards backgroundText="SHIPPED" cards={cards} />
@@ -60,17 +60,17 @@ export default function V33Page() {
           <div><strong>2026</strong><span>computer engineering graduate</span></div>
         </section>
         <section className="v33-now">
-          <div className="v33-section-heading"><span className="v33-kicker">right now</span><h2>Learning in public,<br /><em>building with intent.</em></h2></div>
+          <div className="v33-section-heading"><span className="v33-kicker">current work</span><h2>What I&apos;m working<br /><em>on now.</em></h2></div>
           <div className="v33-now-grid">
             {cvData.training.map((item) => <article key={item.institution}><span className="v33-kicker">{item.period}</span><h3>{item.role}</h3><p>{item.highlights[0]}</p><small>{item.organization} · {item.location}</small></article>)}
             <article><GraduationCap size={20} /><span className="v33-kicker">education</span><h3>{cvData.education[0].degree}</h3><p>{cvData.education[0].institution}</p><small>{cvData.education[0].graduationDate}</small></article>
           </div>
         </section>
         <section className="v33-close">
-          <span className="v33-kicker">keep in touch</span>
-          <h2>Have a good problem?<br /><em>Let&apos;s work on it.</em></h2>
-          <p><MapPin size={14} /> {cvData.contact.location} · open to remote frontend opportunities</p>
-          <a className="v33-cta" href={`mailto:${cvData.contact.email}`}><Mail size={15} /> Start a conversation</a>
+          <span className="v33-kicker">contact</span>
+          <h2>Need a frontend<br /><em>for the next release?</em></h2>
+          <p><MapPin size={14} /> {cvData.contact.location} · available for remote work</p>
+          <a className="v33-cta" href={`mailto:${cvData.contact.email}`}><Mail size={15} /> Email Ahmed</a>
           <a className="v33-phone" href={`tel:${cvData.contact.phone}`}><Phone size={14} /> {cvData.contact.phone}</a>
         </section>
         <footer className="v33-footer"><span>Ahmed Hesham · software developer</span><div><a href={cvData.contact.github} target="_blank" rel="noreferrer"><Code2 size={12} /> GitHub</a><a href={cvData.contact.linkedin} target="_blank" rel="noreferrer"><BriefcaseBusiness size={12} /> LinkedIn</a></div></footer>
