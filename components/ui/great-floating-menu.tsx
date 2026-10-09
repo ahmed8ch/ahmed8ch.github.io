@@ -19,6 +19,15 @@ export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const storedSide = window.localStorage.getItem("icareer-menu-side");
+    if (storedSide === "left" || storedSide === "right") setSide(storedSide);
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("icareer-menu-side", side);
+  }, [side]);
+
+  useEffect(() => {
     if (!open) return;
     const onPointerDown = (event: PointerEvent) => {
       if (rootRef.current && !rootRef.current.contains(event.target as Node)) setOpen(false);
@@ -74,7 +83,7 @@ export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
       >
         <button type="button" className="great-version-trigger" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onClick={onClick} aria-expanded={open} aria-label={open ? "Close version menu" : "Open version menu"} title="Drag this menu to either edge">
           <span><b>AH</b> / portfolio</span>
-          <span className="great-version-action">{open ? "Close" : current}</span>
+          <span className="great-version-action">{open ? "Close" : `Versions · ${current}`}</span>
         </button>
         <AnimatePresence>
           {open && (

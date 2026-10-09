@@ -7,6 +7,7 @@ import { GreatFloatingMenu } from "@/components/ui/great-floating-menu";
 import { ScrollFlyingCards } from "@/components/ui/scroll-flying-cards";
 import { MagneticFilings } from "@/components/ui/magnetic-filings";
 import { versionLinks } from "@/data/version-links";
+import { PortfolioBrandLink } from "@/components/ui/portfolio-brand-link";
 
 type Theme = "dark" | "light";
 
@@ -33,9 +34,15 @@ export default function V33Page() {
       <GreatFloatingMenu links={versionLinks} current="V3.3" />
       <header className="v33-header">
         <a className="v33-wordmark" href="#top"><span>AH</span> Ahmed Hesham</a>
-        <button type="button" className="v33-theme-toggle" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>
-          {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-        </button>
+        <div className="v33-header-actions">
+          <div className="v33-header-socials">
+            <PortfolioBrandLink brand="linkedin" href={cvData.contact.linkedin} label="LinkedIn" />
+            <PortfolioBrandLink brand="github" href={cvData.contact.github} label="GitHub" />
+          </div>
+          <button type="button" className="v33-theme-toggle" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>
+            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+        </div>
       </header>
       <div className="v33-wrap" id="top">
         <section className="v33-hero">
