@@ -87,7 +87,7 @@ export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
   return (
     <div ref={rootRef} className={cn("great-version-menu", `is-${side}`, dragging && "is-dragging")} style={dragX === null ? undefined : { left: dragX, right: "auto" }}>
       <motion.div
-        animate={{ width: open ? 360 : 178, height: open ? 500 : 48 }}
+        animate={{ width: open ? 292 : 156, height: open ? 500 : 48 }}
         transition={{ type: "spring", stiffness: 300, damping: 28 }}
         className={cn("great-version-panel", open && "is-open")}
       >
@@ -98,7 +98,7 @@ export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
         <AnimatePresence>
           {open && (
             <motion.nav initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="great-version-links" aria-label="Portfolio versions">
-              <span className="great-version-label">Explore versions</span>
+              <span className="great-version-label">Explore versions <small>6 routes · scroll</small></span>
               {links.map((link) => (
                 <a className={link.label === current ? "is-current" : ""} href={link.href} key={link.href} onClick={() => setOpen(false)}>
                   <strong>{link.label}</strong><small>{link.description}</small>
