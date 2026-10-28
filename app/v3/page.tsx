@@ -23,6 +23,7 @@ import { cvData } from "@/data/cv";
 import { MagneticFilings } from "@/components/ui/magnetic-filings";
 import { GreatFloatingMenu } from "@/components/ui/great-floating-menu";
 import { versionLinks } from "@/data/version-links";
+import { withBasePath } from "@/lib/base-path";
 
 type Theme = "dark" | "light";
 
@@ -60,12 +61,12 @@ export default function V3Page() {
       <MagneticFilings theme={theme} />
       <div className="v3-noise" aria-hidden="true" />
       <nav className="v3-nav" aria-label="Primary navigation">
-        <a className="v3-logo" href="#top">AH<span>✳</span>L</a>
+        <a className="v3-logo" href="#top">AH<span>·</span>L</a>
         <div className={`v3-nav-links ${menuOpen ? "open" : ""}`}>
           <a href="#work" onClick={() => setMenuOpen(false)}>Work</a>
           <a href="#story" onClick={() => setMenuOpen(false)}>Story</a>
           <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
-          <a href="/" onClick={() => setMenuOpen(false)}>V1 <ArrowUpRight size={13} /></a>
+          <a href={withBasePath("/")} onClick={() => setMenuOpen(false)}>V1 <ArrowUpRight size={13} /></a>
         </div>
         <div className="v3-nav-actions">
           <button type="button" className="v3-icon-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>
@@ -95,7 +96,7 @@ export default function V3Page() {
             </div>
           </div>
           <aside className="v3-intro-card">
-            <div className="v3-avatar">AH<span>✳</span></div>
+            <div className="v3-avatar">AH</div>
             <div className="v3-card-label">A little about me</div>
             <p>Frontend-minded developer with a Flutter foundation, a growing React toolkit, and an unhealthy appreciation for thoughtful interfaces.</p>
             <button type="button" className="v3-spark-button" onClick={() => setSparkle(!sparkle)} aria-pressed={sparkle}>

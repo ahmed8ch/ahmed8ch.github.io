@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { withBasePath } from "@/lib/base-path";
 import { cn } from "@/lib/utils";
 
 export type VersionLink = { label: string; href: string; description: string };
@@ -98,9 +99,9 @@ export function GreatFloatingMenu({ links, current }: GreatFloatingMenuProps) {
         <AnimatePresence>
           {open && (
             <motion.nav initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="great-version-links" aria-label="Portfolio versions">
-              <span className="great-version-label">Explore versions <small>6 routes · scroll</small></span>
+              <span className="great-version-label">Explore versions <small>{links.length} routes · scroll</small></span>
               {links.map((link) => (
-                <a className={link.label === current ? "is-current" : ""} href={link.href} key={link.href} onClick={() => setOpen(false)}>
+                <a className={link.label === current ? "is-current" : ""} href={withBasePath(link.href)} key={link.href} onClick={() => setOpen(false)}>
                   <strong>{link.label}</strong><small>{link.description}</small>
                 </a>
               ))}

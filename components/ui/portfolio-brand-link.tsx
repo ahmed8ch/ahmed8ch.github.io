@@ -16,7 +16,7 @@ const brandPaths: Record<Brand, ReactNode> = {
 export function PortfolioBrandLink({ brand, href, label }: PortfolioBrandLinkProps) {
   return (
     <a className="portfolio-brand-link" href={href} target="_blank" rel="noreferrer" aria-label={label}>
-      <svg aria-hidden="true" viewBox="0 0 24 24" role="img">{brandPaths[brand]}</svg>
+      <svg aria-hidden="true" height={14} viewBox="0 0 24 24" role="img" width={14}>{brandPaths[brand]}</svg>
       <span>{label}</span>
     </a>
   );

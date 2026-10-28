@@ -6,6 +6,7 @@ import DotGridBackground from "@/components/ui/dot-grid-background";
 import { cvData } from "@/data/cv";
 import { GreatFloatingMenu } from "@/components/ui/great-floating-menu";
 import { versionLinks } from "@/data/version-links";
+import { withBasePath } from "@/lib/base-path";
 
 export default function V2Page() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -37,7 +38,7 @@ export default function V2Page() {
                 {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
               </button>
               <button type="button" className="v2-button" onClick={() => window.print()} aria-label="Print CV"><Printer size={14} /> PDF</button>
-              <a className="v2-button" href="/" aria-label="Open original CV">v1 <ArrowUpRight size={13} /></a>
+              <a className="v2-button" href={withBasePath("/")} aria-label="Open original CV">v1 <ArrowUpRight size={13} /></a>
             </div>
           </header>
 

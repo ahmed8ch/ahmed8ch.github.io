@@ -7,4 +7,5 @@ export const versionLinks: readonly VersionLink[] = [
   { label: "V3.1", href: "/v31/", description: "Ana-inspired zinc layout" },
   { label: "V3.2", href: "/v32/", description: "open notebook portfolio" },
   { label: "V3.3", href: "/v33/", description: "scroll-flying project cards" },
+  { label: "V3.4", href: "/v34/", description: "unified master portfolio" },
 ];

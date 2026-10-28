@@ -7,6 +7,7 @@ import { FloatingMenu } from "@/components/ui/floating-menu";
 import { MagneticFilings } from "@/components/ui/magnetic-filings";
 import { GreatFloatingMenu } from "@/components/ui/great-floating-menu";
 import { versionLinks } from "@/data/version-links";
+import { withBasePath } from "@/lib/base-path";
 
 type Theme = "dark" | "light";
 
@@ -99,7 +100,7 @@ export default function V31Page() {
         </section>
 
         <section className="v31-contact" id="contact"><span className="v31-overline">contact</span><h2>Let&apos;s build something<br /><span>worth opening twice.</span></h2><div><a href={`mailto:${cvData.contact.email}`}><Mail size={17} /> {cvData.contact.email}</a><a href={`tel:${cvData.contact.phone.replaceAll(" ", "")}`}><Phone size={17} /> {cvData.contact.phone}</a><a href={cvData.contact.linkedin} target="_blank" rel="noreferrer"><BriefcaseBusiness size={17} /> LinkedIn</a><a href={cvData.contact.github} target="_blank" rel="noreferrer"><Code2 size={17} /> GitHub</a></div></section>
-        <footer className="v31-footer"><span>Ahmed Hesham Lotfy · software developer</span><a href="/">return to V1 <ArrowUpRight size={12} /></a></footer>
+        <footer className="v31-footer"><span>Ahmed Hesham Lotfy · software developer</span><a href={withBasePath("/")}>return to V1 <ArrowUpRight size={12} /></a></footer>
       </div>
     </main>
   );
